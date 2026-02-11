@@ -1,0 +1,6 @@
+@use "../../styles/variables.scss" as vars;
+
+.card {
+  color: var(--color-dark-lilac);
+  background-color: aqua;
+}
