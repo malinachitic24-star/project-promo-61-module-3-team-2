@@ -1,6 +1,49 @@
 @use "../../styles/variables.scss" as vars;
 
-.card {
-  color: var(--color-dark-lilac);
-  background-color: aqua;
+  .landing {
+  min-height: 100vh;
+  padding: 24px 16px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: auto;
+
+  // Fondo tipo galaxia (sin imagen)
+  background:
+    radial-gradient(800px 500px at 50% 20%, rgba(190, 160, 255, 0.22), transparent 60%),
+    radial-gradient(700px 500px at 10% 10%, rgba(120, 180, 255, 0.15), transparent 55%),
+    radial-gradient(900px 600px at 90% 70%, rgba(90, 60, 180, 0.25), transparent 60%),
+    linear-gradient(180deg, rgba(18, 10, 32, 1) 0%, rgba(10, 8, 22, 1) 100%);
+  
+
+  color: #fff;
 }
+
+.landing::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.55;
+
+  background-image:
+   radial-gradient(circle at 3% 15%, #fff 1px, transparent 2px),
+    radial-gradient(circle at 8% 72%, #fff 1px, transparent 2px),
+    radial-gradient(circle at 12% 40%, #fff 1px, transparent 2px),
+    radial-gradient(circle at 17% 88%, #fff 1px, transparent 2px),
+    radial-gradient(circle at 22% 25%, #fff 1px, transparent 2px),
+    radial-gradient(circle at 28% 60%, #fff 1px, transparent 2px),
+    radial-gradient(circle at 34% 12%, #fff 1px, transparent 2px),
+    radial-gradient(circle at 39% 78%, #fff 1px, transparent 2px),
+    radial-gradient(circle at 45% 33%, #fff 1px, transparent 2px),
+    radial-gradient(circle at 51% 90%, #fff 1px, transparent 2px),
+    radial-gradient(circle at 58% 44%, #fff 1px, transparent 2px),
+    radial-gradient(circle at 63% 18%, #fff 1px, transparent 2px),
+    radial-gradient(circle at 69% 72%, #fff 1px, transparent 2px),
+    radial-gradient(circle at 74% 29%, #fff 1px, transparent 2px),
+    radial-gradient(circle at 80% 55%, #fff 1px, transparent 2px),
+    radial-gradient(circle at 86% 12%, #fff 1px, transparent 2px),
+    radial-gradient(circle at 92% 67%, #fff 1px, transparent 2px),
+    radial-gradient(circle at 97% 35%, #fff 1px, transparent 2px);
+}
+

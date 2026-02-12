@@ -1,4 +1,4 @@
-
+import  "../../styles/ProptsStyles/HeroButton.scss"
 
 import { Link } from "react-router-dom";
 
