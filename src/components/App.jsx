@@ -1,10 +1,16 @@
 //import { useState } from 'react'
 import "../styles/App.scss";
+import Header from "./Header";
+import Landing from "./Landing/Landing";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="card">
-      <h1>Hola mundo</h1>
+    <div className="body">
+      <Header />
+      <Routes>
+        <Route path="/" element={<Landing />}></Route>
+      </Routes>
     </div>
   );
 }
