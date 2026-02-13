@@ -1,10 +1,10 @@
 //import { useState } from 'react'
-import "../styles/App.scss";
+import "../styles/MalinaAppStyle.scss";
 import Header from "./Header";
 import Landing from "./Landing/Landing";
 import { Routes, Route } from "react-router-dom";
 
-function App() {
+function MalinaApp() {
   return (
     <div className="body">
       <Header />
@@ -15,4 +15,4 @@ function App() {
   );
 }
 
-export default App;
+export default MalinaApp;

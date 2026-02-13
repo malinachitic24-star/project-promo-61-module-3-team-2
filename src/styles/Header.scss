@@ -1,0 +1,29 @@
+@use "../styles/variables" as vars;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--color-dark);
+}
+
+.header__left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.header__icon {
+  font-size: 3.1rem;
+  color: var(--color-white);
+}
+
+.header__title {
+  font: var(--font-title-brand);
+  text-transform: capitalize;
+  color: var(--color-white-50);
+}
+
+.header__logo {
+  height: 100px;
+  color: var(--color-white);
+}
