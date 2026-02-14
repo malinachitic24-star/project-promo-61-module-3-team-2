@@ -2,33 +2,24 @@
 
 
 
-.cardlist-title {
-  text-align: center;
-  color: var(--color-greyish-brown);
-  margin-bottom: 40px;
-  font-size: 2rem;
-}
 
 /* GRID DE CARDS */
 
 .cardlist {
   list-style: none;
-  display: grid;
+  display: flex;
   gap: 30px;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-}
-
-/* CARD */
-
-.card {
   background-color: var(--color-dark);
   border-radius: 20px;
-  overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   color: var(--color-white);
 }
 
+.cardlist-container_id {
+  color: white;
+}
 
 /* IMAGEN */
 
@@ -41,7 +32,7 @@
 /* CONTENIDO */
 
 .card-name {
-  color: var(--color-dark-lilac);
+  color: var(--color-white);
   margin-bottom: 15px;
   font-family: var(--font-base2);
   font-size: 1.3rem;
