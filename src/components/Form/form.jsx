@@ -1,12 +1,8 @@
-
 /* IMPORTS */
-
 import "../../styles/form.scss";
 
-function Form({ formData, onChangeForm, onSubmitForm }) {
-
+function Form({ formData, onChangeForm, onSubmitForm, onResetForm, isLoading }) {
   /* TEXT INPUT HANDLER */
-
   const handleChange = (ev) => {
     const { name, value } = ev.target;
 
@@ -17,79 +13,76 @@ function Form({ formData, onChangeForm, onSubmitForm }) {
   };
 
   /* SUBMIT HANDLER */
-
   const handleSubmit = (ev) => {
     ev.preventDefault();
+    if (isLoading) return;
     onSubmitForm();
   };
 
   /* IMAGE INPUT HANDLER */
+  const fileToCompressedDataUrl = (
+    file,
+    { maxWidth = 600, quality = 0.6 } = {}
+  ) =>
+    new Promise((resolve, reject) => {
+      const img = new Image();
+      const reader = new FileReader();
 
-const fileToCompressedDataUrl = (file, { maxWidth = 600, quality = 0.6 } = {}) =>
-  new Promise((resolve, reject) => {
-    const img = new Image();
-    const reader = new FileReader();
+      reader.onload = () => {
+        img.src = reader.result;
+      };
 
-    reader.onload = () => (img.src = reader.result);
+      img.onload = () => {
+        const scale = Math.min(1, maxWidth / img.width);
+        const w = Math.max(1, Math.round(img.width * scale));
+        const h = Math.max(1, Math.round(img.height * scale));
 
-    img.onload = () => {
-      const scale = Math.min(1, maxWidth / img.width);
-      const w = Math.round(img.width * scale);
-      const h = Math.round(img.height * scale);
+        const canvas = document.createElement("canvas");
+        canvas.width = w;
+        canvas.height = h;
 
-      const canvas = document.createElement("canvas");
-      canvas.width = w;
-      canvas.height = h;
+        const ctx = canvas.getContext("2d");
 
-      const ctx = canvas.getContext("2d");
+        // background
+        ctx.fillStyle = "#fff";
+        ctx.fillRect(0, 0, w, h);
 
-      // background
-      ctx.fillStyle = "#fff";
-      ctx.fillRect(0, 0, w, h);
+        ctx.drawImage(img, 0, 0, w, h);
 
-      ctx.drawImage(img, 0, 0, w, h);
+        // always jpg
+        const dataUrl = canvas.toDataURL("image/jpeg", quality);
+        resolve(dataUrl);
+      };
 
-      // allways jpg
-      const dataUrl = canvas.toDataURL("image/jpeg", quality);
-      resolve(dataUrl);
-    };
+      img.onerror = () => reject(new Error("No pude cargar la imagen."));
+      reader.onerror = () => reject(new Error("No pude leer el archivo."));
 
-    img.onerror = reject;
-    reader.onerror = reject;
-
-    reader.readAsDataURL(file);
-  });
-
-const handleImageChange = async (ev) => {
-  const file = ev.target.files?.[0];
-  const { name } = ev.target;
-  if (!file) return;
-
-  try {
-    const compressedDataUrl = await fileToCompressedDataUrl(file, {
-      maxWidth: 600,
-      quality: 0.6,
+      reader.readAsDataURL(file);
     });
 
-    onChangeForm({
-      ...formData,
-      [name]: compressedDataUrl,
-    });
-  } catch (e) {
-    console.warn("Error procesando imagen:", e);
-  }
-};
+  const handleImageChange = async (ev) => {
+    const file = ev.target.files?.[0];
+    const { name } = ev.target;
+    if (!file) return;
 
+    try {
+      const compressedDataUrl = await fileToCompressedDataUrl(file, {
+        maxWidth: 600,
+        quality: 0.6,
+      });
 
+      onChangeForm({
+        ...formData,
+        [name]: compressedDataUrl,
+      });
+    } catch (e) {
+      console.warn("Error procesando imagen:", e);
+    }
+  };
 
   return (
-    <form
-      className="project-form"
-      onSubmit={handleSubmit}
-      aria-label="Project form"
-    >
+    <form className="project-form" onSubmit={handleSubmit} aria-label="Project form">
       {/* PROJECT INFO SECTION */}
-
       <fieldset className="project-form__fieldset">
         <legend className="project-form__legend">Información del Proyecto</legend>
         <legend className="project-form__legend_2">Cuéntanos sobre tu proyecto</legend>
@@ -162,7 +155,6 @@ const handleImageChange = async (ev) => {
       </fieldset>
 
       {/* AUTHOR INFO SECTION */}
-
       <fieldset className="project-form__fieldset">
         <legend className="project-form__legend_2">Cuéntanos sobre la autora</legend>
 
@@ -190,7 +182,6 @@ const handleImageChange = async (ev) => {
       </fieldset>
 
       {/* IMAGE UPLOAD SECTION */}
-      
       <fieldset className="project-form__fieldset">
         <legend className="project-form__legend_2">Carga las imágenes</legend>
 
@@ -225,11 +216,19 @@ const handleImageChange = async (ev) => {
         </div>
       </fieldset>
 
-      {/* SUBMIT BUTTON */}
-
+      {/* BUTTONS */}
       <div className="project-form__btn-container">
-        <button className="project-form__btn" type="submit">
-          Crear proyecto molón
+        <button className="project-form__btn" type="submit" disabled={isLoading}>
+          {isLoading ? "Creando..." : "Crear proyecto molón"}
+        </button>
+
+        <button
+          type="button"
+          onClick={onResetForm}
+          className="project-form__btn project-form__btn--secondary"
+          disabled={isLoading}
+        >
+          Borrar Datos
         </button>
       </div>
     </form>

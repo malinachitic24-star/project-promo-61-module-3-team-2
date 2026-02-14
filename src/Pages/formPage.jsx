@@ -8,6 +8,20 @@ import { createProjectCard } from "../services/api";
 /* LOCAL STORAGE KEYS */
 const LS_FORM_KEY = "projectFormData";
 
+/* INITIAL STATE */
+const INITIAL_FORM_DATA = {
+  name: "",
+  slogan: "",
+  technologies: "",
+  repo: "",
+  demo: "",
+  desc: "",
+  author: "",
+  job: "",
+  image: "",
+  photo: "",
+};
+
 /* HELPERS */
 const isEmpty = (v) => typeof v !== "string" || v.trim().length === 0;
 
@@ -20,8 +34,7 @@ const isValidUrl = (value) => {
   }
 };
 
-// IMG 
-
+/* IMG HELPERS */
 const toDataUrl = (value) => {
   if (!value || typeof value !== "string") return "";
   if (value.startsWith("data:image/")) return value;
@@ -34,14 +47,12 @@ const toDataUrl = (value) => {
   return `data:image/jpeg;base64,${value}`;
 };
 
-// return base64
 const toPureBase64 = (value) => {
   if (!value || typeof value !== "string") return "";
   const base = value.includes(",") ? value.split(",")[1] : value;
   return base.replace(/\s/g, "").trim();
 };
 
-// jpg  and sizes normalize
 const normalizeToJpegBase64 = async (value, { maxWidth = 900, quality = 0.8 } = {}) => {
   const dataUrl = toDataUrl(value);
   if (!dataUrl) return "";
@@ -62,8 +73,6 @@ const normalizeToJpegBase64 = async (value, { maxWidth = 900, quality = 0.8 } = 
   canvas.height = h;
 
   const ctx = canvas.getContext("2d");
-
-  // background
   ctx.fillStyle = "#fff";
   ctx.fillRect(0, 0, w, h);
   ctx.drawImage(img, 0, 0, w, h);
@@ -73,20 +82,8 @@ const normalizeToJpegBase64 = async (value, { maxWidth = 900, quality = 0.8 } = 
 };
 
 function FormPage() {
-
   /* FORM STATE (WITH LOCALSTORAGE) */
-  const [formData, setFormData] = useLocalStorage(LS_FORM_KEY, {
-    name: "",
-    slogan: "",
-    technologies: "",
-    repo: "",
-    demo: "",
-    desc: "",
-    author: "",
-    job: "",
-    image: "",
-    photo: "", 
-  });
+  const [formData, setFormData] = useLocalStorage(LS_FORM_KEY, INITIAL_FORM_DATA);
 
   /* API/UI STATE */
   const [isLoading, setIsLoading] = useState(false);
@@ -98,8 +95,17 @@ function FormPage() {
     setFormData(updatedData);
   };
 
+  /* RESET HANDLER  */
+  const handleResetForm = () => {
+    setFormData(INITIAL_FORM_DATA);
+    setResultUrl("");
+    setErrorMessage("");
+  };
+
   /* SUBMIT HANDLER */
   const handleSubmitForm = async () => {
+    if (isLoading) return;
+
     setErrorMessage("");
     setResultUrl("");
 
@@ -123,7 +129,7 @@ function FormPage() {
       return;
     }
 
-    // Validations URLs 
+    // Validations URLs
     if (!isValidUrl(formData.repo.trim())) {
       setErrorMessage("La URL del repositorio no parece válida.");
       return;
@@ -136,7 +142,7 @@ function FormPage() {
     setIsLoading(true);
 
     try {
-      // Normalize img to jpg 
+      // Normalize img to jpg base64 
       const authorImageBase64 = await normalizeToJpegBase64(formData.image, {
         maxWidth: 900,
         quality: 0.8,
@@ -154,9 +160,9 @@ function FormPage() {
         repo: formData.repo.trim(),
         demo: formData.demo.trim(),
         desc: formData.desc.trim(),
-        autor: formData.author.trim(),
+        autor: formData.author.trim(), 
         job: formData.job.trim(),
-        image: authorImageBase64,
+        image: authorImageBase64, 
         photo: projectPhotoBase64, 
       };
 
@@ -185,13 +191,13 @@ function FormPage() {
   return (
     <main className="form-page">
       <div className="form-layout">
-        
         {/* FORM */}
         <section className="form-layout__form">
           <ProjectForm
             formData={formData}
             onChangeForm={handleFormChange}
             onSubmitForm={handleSubmitForm}
+            onResetForm={handleResetForm}
             isLoading={isLoading}
           />
 
@@ -205,7 +211,7 @@ function FormPage() {
 
             {!isLoading && resultUrl && (
               <p className="form-result__ok">
-                 Tu tarjeta está aquí:{" "}
+                Tu tarjeta está aquí:{" "}
                 <a href={resultUrl} target="_blank" rel="noreferrer">
                   {resultUrl}
                 </a>

@@ -1,6 +1,7 @@
 
 /* IMPORTS */
 import placeholderImg from "../../images/PlaceholderPhoto.png";
+import "../../styles/preview.scss";
 
 
 function PreviewCard({ formData }) {
