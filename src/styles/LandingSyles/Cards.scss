@@ -1,0 +1,58 @@
+.card_container{
+    width: min(38.75rem, 100%);
+    margin: 0;
+}
+//Header Card//
+.card_header{
+    background: rgba(255,255,255,0.06);
+    padding: 1rem;
+    border-radius: 1rem 1rem 0 0;
+}
+
+.card_project-img{
+    width: 100%;
+    height: 20rem;
+    object-fit: cover;
+    display: block;
+    border-radius: 0.625rem;
+}
+
+
+
+//Cuerpo//
+.card_body{
+    position: relative;
+    padding: 1.75rem 1.5rem 1.25rem;
+}
+
+.card_body::before{
+    display:block;
+    text-align: center;
+    font-size: 0.85rem;
+    color: rgba(0,0,0,0.55);
+    margin-bottom: 1.25rem;
+
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(0,0,0,0.25) 18%,
+        rgba(0,0,0,0.25) 30%,
+        transparent 30%,
+        transparent 70%,
+        rgba(0,0,0,0.25) 70%,
+        rgba(0,0,0,0.25) 82%,
+        transparent 100%
+    );
+    background-size: 100% 0.125rem;
+    background-repeat: no-repeat;
+    background-position: center 55%;
+    padding: 0.25rem 0;
+}
+
+.card_title{
+    margin: 0;
+    font-size: 1.8rem;
+    line-height: 1.1;
+    font-weight: 800;
+    color: rgba(0,0,0,0.9);
+}
