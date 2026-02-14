@@ -1,42 +1,71 @@
+
+/* IMPORTS */
 import placeholderImg from "../../images/PlaceholderPhoto.png";
 
+
 function PreviewCard({ formData }) {
-  const {
-    name,
-    slogan,
-    technologies,
-    repo,
-    demo,
+
+  /* HELPERS (CLEAN + REUSABLE) */
+
+  const safeText = (value, fallback) => {
+    const v = typeof value === "string" ? value.trim() : "";
+    return v.length ? v : fallback;
+  };
+
+  const safeUrl = (value) => {
+    const v = typeof value === "string" ? value.trim() : "";
+    return v.length ? v : "";
+  };
+
+  const safeImage = (value) => {
+    const v = typeof value === "string" ? value.trim() : "";
+    return v.length ? v : placeholderImg;
+  };
+
+  /* DESTRUCTURING FORM DATA */
+
+  const { name, slogan, technologies, repo, demo, desc, author, job, image, photo } = formData;
+
+  /* SAFE FALLBACK VALUES */
+
+  const safeProjectName = safeText(name, "Nombre del Proyecto");
+  const safeSlogan = safeText(slogan, "Slogan");
+  const safeTech = safeText(technologies, "Tecnologías");
+  const safeDesc = safeText(
     desc,
-    autor,
-    job,
-    image,
-    photo,
-  } = formData;
+    "La descripción de tu proyecto aparecerá aquí. Cuéntanos por qué es tan molón tu proyecto"
+  );
 
-  const safeProjectName = name?.trim() || "Nombre del proyecto";
-  const safeSlogan = slogan?.trim() || "Slogan del proyecto";
-  const safeTech = technologies?.trim() || "React • Sass • Git";
-  const safeDesc =
-    desc?.trim() ||
-    "Aquí aparecerá la descripción del proyecto. Cuéntanos qué hace y por qué mola.";
-  const safeAutor = autor?.trim() || "Nombre de la autora";
-  const safeJob = job?.trim() || "Front-end developer";
+  const safeAuthor = safeText(author, "Nombre de la autora");
+  const safeJob = safeText(job, "Puesto de trabajor");
 
-  const safeAuthorImg = image?.trim() || placeholderImg;
-  const safeProjectImg = photo?.trim() || placeholderImg;
+  const safeRepo = safeUrl(repo);
+  const safeDemo = safeUrl(demo);
+
+  const safeAuthorImg = safeImage(image);
+  const safeProjectImg = safeImage(photo);
+
 
   return (
-    <section className="preview" aria-label="Previsualización de la tarjeta">
+    <section
+      className="preview"
+      aria-label="Project card preview"
+      aria-live="polite"
+      aria-atomic="true"
+    >
       <article className="preview__card">
-        
+
+        {/* PROJECT IMAGE HEADER */}
+
         <header className="preview__header">
           <img
             className="preview__project-img"
             src={safeProjectImg}
-            alt="Imagen del proyecto"
+            alt="Project screenshot"
           />
         </header>
+
+        {/* CARD BODY */}
 
         <div className="preview__body">
           <h3 className="preview__title">{safeProjectName}</h3>
@@ -44,10 +73,11 @@ function PreviewCard({ formData }) {
           <p className="preview__tech">{safeTech}</p>
           <p className="preview__desc">{safeDesc}</p>
 
+          {/* LINKS  */}
           <div className="preview__links">
-            {repo?.trim() && (
+            {safeRepo && (
               <a
-                href={repo.trim()}
+                href={safeRepo}
                 target="_blank"
                 rel="noreferrer"
                 className="preview__link"
@@ -56,9 +86,9 @@ function PreviewCard({ formData }) {
               </a>
             )}
 
-            {demo?.trim() && (
+            {safeDemo && (
               <a
-                href={demo.trim()}
+                href={safeDemo}
                 target="_blank"
                 rel="noreferrer"
                 className="preview__link"
@@ -67,30 +97,31 @@ function PreviewCard({ formData }) {
               </a>
             )}
 
-            {!repo?.trim() && !demo?.trim() && (
+            {!safeRepo && !safeDemo && (
               <p className="preview__links-empty">
-                Añade Repo y/o Demo para que aparezcan aquí ✨
+                Añade el repo y/o la demo, aparecerán aquí
               </p>
             )}
           </div>
         </div>
 
+        {/* AUTHOR FOOTER */}
         <footer className="preview__footer">
           <img
             className="preview__author-img"
             src={safeAuthorImg}
-            alt="Foto de la autora"
+            alt="Author profile photo"
           />
+
           <div className="preview__author-info">
-            <p className="preview__author">{safeAutor}</p>
+            <p className="preview__author">{safeAuthor}</p>
             <p className="preview__job">{safeJob}</p>
           </div>
         </footer>
-
       </article>
     </section>
   );
 }
 
-export default PreviewCard;
 
+export default PreviewCard;

@@ -1,8 +1,12 @@
+
+/* IMPORTS */
+
 import "../../styles/form.scss";
 
-
-
 function Form({ formData, onChangeForm, onSubmitForm }) {
+
+  /* TEXT INPUT HANDLER */
+
   const handleChange = (ev) => {
     const { name, value } = ev.target;
 
@@ -12,46 +16,97 @@ function Form({ formData, onChangeForm, onSubmitForm }) {
     });
   };
 
+  /* SUBMIT HANDLER */
+
   const handleSubmit = (ev) => {
     ev.preventDefault();
     onSubmitForm();
   };
 
-  const handleImageChange = (ev) => {
-  const file = ev.target.files[0];
-  const { name } = ev.target;
+  /* IMAGE INPUT HANDLER */
 
+const fileToCompressedDataUrl = (file, { maxWidth = 600, quality = 0.6 } = {}) =>
+  new Promise((resolve, reject) => {
+    const img = new Image();
+    const reader = new FileReader();
+
+    reader.onload = () => (img.src = reader.result);
+
+    img.onload = () => {
+      const scale = Math.min(1, maxWidth / img.width);
+      const w = Math.round(img.width * scale);
+      const h = Math.round(img.height * scale);
+
+      const canvas = document.createElement("canvas");
+      canvas.width = w;
+      canvas.height = h;
+
+      const ctx = canvas.getContext("2d");
+
+      // background
+      ctx.fillStyle = "#fff";
+      ctx.fillRect(0, 0, w, h);
+
+      ctx.drawImage(img, 0, 0, w, h);
+
+      // allways jpg
+      const dataUrl = canvas.toDataURL("image/jpeg", quality);
+      resolve(dataUrl);
+    };
+
+    img.onerror = reject;
+    reader.onerror = reject;
+
+    reader.readAsDataURL(file);
+  });
+
+const handleImageChange = async (ev) => {
+  const file = ev.target.files?.[0];
+  const { name } = ev.target;
   if (!file) return;
 
-  const reader = new FileReader();
+  try {
+    const compressedDataUrl = await fileToCompressedDataUrl(file, {
+      maxWidth: 600,
+      quality: 0.6,
+    });
 
-  reader.onloadend = () => {
     onChangeForm({
       ...formData,
-      [name]: reader.result,
+      [name]: compressedDataUrl,
     });
-  };
-
-  reader.readAsDataURL(file);
+  } catch (e) {
+    console.warn("Error procesando imagen:", e);
+  }
 };
 
 
+
   return (
-    <form className="project-form" onSubmit={handleSubmit} aria-label="Formulario de proyecto">
+    <form
+      className="project-form"
+      onSubmit={handleSubmit}
+      aria-label="Project form"
+    >
+      {/* PROJECT INFO SECTION */}
+
       <fieldset className="project-form__fieldset">
-        <legend className="project-form__legend">Información del proyecto</legend>
+        <legend className="project-form__legend">Información del Proyecto</legend>
+        <legend className="project-form__legend_2">Cuéntanos sobre tu proyecto</legend>
 
         <input
+          required
           className="project-form__input"
           id="name"
           type="text"
           name="name"
-          placeholder="Nombre del proyecto"
+          placeholder="Nombre del Proyecto"
           value={formData.name}
           onChange={handleChange}
         />
 
         <input
+          required
           className="project-form__input"
           id="slogan"
           type="text"
@@ -61,8 +116,8 @@ function Form({ formData, onChangeForm, onSubmitForm }) {
           onChange={handleChange}
         />
 
-
         <input
+          required
           className="project-form__input"
           id="technologies"
           type="text"
@@ -73,27 +128,29 @@ function Form({ formData, onChangeForm, onSubmitForm }) {
         />
 
         <input
+          required
           className="project-form__input"
           id="repo"
           type="url"
           name="repo"
-          placeholder="Repositorio"
+          placeholder="URL repositorio"
           value={formData.repo}
           onChange={handleChange}
         />
 
         <input
+          required
           className="project-form__input"
           id="demo"
           type="url"
           name="demo"
-          placeholder="Demo"
+          placeholder="URL Demo"
           value={formData.demo}
           onChange={handleChange}
         />
 
-
         <textarea
+          required
           className="project-form__textarea"
           id="desc"
           name="desc"
@@ -104,69 +161,77 @@ function Form({ formData, onChangeForm, onSubmitForm }) {
         />
       </fieldset>
 
+      {/* AUTHOR INFO SECTION */}
+
       <fieldset className="project-form__fieldset">
-        <legend className="project-form__legend">Información de la autora</legend>
+        <legend className="project-form__legend_2">Cuéntanos sobre la autora</legend>
 
         <input
+          required
           className="project-form__input"
-          id="autor"
+          id="author"
           type="text"
-          name="autor"
-          placeholder="Nombre"
-          value={formData.autor}
+          name="author"
+          placeholder="Nombre de la autora"
+          value={formData.author}
           onChange={handleChange}
         />
 
         <input
+          required
           className="project-form__input"
           id="job"
           type="text"
           name="job"
-          placeholder="Trabajo"
+          placeholder="Puesto de trabajo"
           value={formData.job}
           onChange={handleChange}
         />
       </fieldset>
 
-        <fieldset className="project-form__fieldset">
+      {/* IMAGE UPLOAD SECTION */}
+      
+      <fieldset className="project-form__fieldset">
+        <legend className="project-form__legend_2">Carga las imágenes</legend>
 
         <div className="project-form__uploadRow">
-            <label className="project-form__uploadBtn" htmlFor="photo">
-            Subir foto del
+          <label className="project-form__uploadBtn" htmlFor="photo">
+            Subir foto
             <br />
-            proyecto
-            </label>
-            <input
+            del proyecto
+          </label>
+          <input
             id="photo"
             type="file"
             name="photo"
             accept="image/*"
             onChange={handleImageChange}
             className="project-form__fileInput"
-            />
+          />
 
-            <label className="project-form__uploadBtn" htmlFor="image">
-            Subir foto de la
+          <label className="project-form__uploadBtn" htmlFor="image">
+            Subir foto
             <br />
-            autora
-            </label>
-            <input
+            de la autora
+          </label>
+          <input
             id="image"
             type="file"
             name="image"
             accept="image/*"
             onChange={handleImageChange}
             className="project-form__fileInput"
-            />
+          />
         </div>
-        </fieldset>
+      </fieldset>
 
+      {/* SUBMIT BUTTON */}
 
-
-
-      <button className="project-form__btn" type="submit">
-        Crear Proyecto Molón
-      </button>
+      <div className="project-form__btn-container">
+        <button className="project-form__btn" type="submit">
+          Crear proyecto molón
+        </button>
+      </div>
     </form>
   );
 }
