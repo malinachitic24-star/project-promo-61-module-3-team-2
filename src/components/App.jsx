@@ -9,9 +9,9 @@ function App() {
   return (
     <div className="body">
       <Header />
-      <AboutUs></AboutUs>
       <Routes>
         <Route path="/" element={<Landing />}></Route>
+        <Route path="/aboutus" element={<AboutUs></AboutUs>}></Route>
       </Routes>
     </div>
   );
