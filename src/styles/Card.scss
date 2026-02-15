@@ -6,13 +6,15 @@
 .h1 {
   color: var(--color-dark);
   margin-left: 2rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
+
+/*GRID DE CARTAS*/ 
 .cardlist {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 20px;
-  margin-top: 5rem;
+  margin-top: 2rem;
   margin-left: 2rem;
 }
 
@@ -24,10 +26,33 @@
   color: var(--color-white);
   padding: 15px;
   text-align: center;
+  line-height: 1.5;
+  
 }
 
 .cardlist-container_image {
   width: 10rem;
   object-fit: cover;
   border-radius: 0.6rem;
+  margin-top: 1rem;
+}
+
+/* TABLET */
+@media (min-width: 48rem) {
+  .cardlist {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  
+}
+
+/*DESKTOP*/
+@media (min-width: 64rem) {
+  .cardlist {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+ 
 }
