@@ -3,10 +3,13 @@
 
 
 .preview {
-  min-height: 100dvh;
+  min-height: 100%;
   display: grid;
   place-items: center;
   padding: 1.5rem 1rem;
+  color: rgb(42, 19, 83);
+  text-align: center;
+  opacity: 0.9;
 
 }
 
@@ -36,7 +39,7 @@
   box-shadow: 0 1.25rem 2.5rem rgba(0, 0, 0, 0.45);
 }
 
-/* Body: tarjeta blanca */
+
 .preview__body {
     display: grid;
   place-items: center;
@@ -50,12 +53,10 @@
   background: rgba(255, 255, 255, 0.96);
   border-radius: 1.5rem 1.5rem 0 0;
   padding: 1.25rem 1.25rem 0.9rem;
-
-  /* sombra de la tarjeta */
   box-shadow: 0 1.1rem 2.2rem rgba(0, 0, 0, 0.28);
 }
 
-/* mini “título” */
+
 .preview__body::before {
   content: "Personal Project Card";
   display: block;
@@ -68,7 +69,7 @@
 
 .preview__title {
   margin: 0 0 0.35rem;
-  font-size: 1.35rem;
+  font-size: 1rem;
   line-height: 1.05;
   font-weight: 800;
 }
@@ -92,7 +93,7 @@
   opacity: 0.9;
 }
 
-/* Links como “pill” a la derecha (y si no hay, texto suave) */
+
 .preview__links {
   display: flex;
   justify-content: flex-end;
@@ -101,7 +102,7 @@
   
 }
 
-.preview__link {
+.preview__link, .preview__links-empty{
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -136,7 +137,7 @@
   position: relative;
   z-index: 2;
 
-  width: min(92%, 24.5rem);
+  width: min(80%, 24.5rem);
   margin-left: auto;
   margin-right: auto;
 
@@ -194,12 +195,16 @@
   }
 
   .preview__project-img {
-  width: min(100%, 30rem);
-  height: 50rem;
+  width: min(80%, 30rem);
+  height: max-content;
+  max-height: 35rem;
+  object-fit: cover;
+  display: block;
+
   }
 
   .preview__body {
-    margin-top: 1rem;
+    margin-top: 10rem;
   }
 
   .preview__body,
@@ -209,6 +214,6 @@
   }
 
   .preview__title {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
 }
