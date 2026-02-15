@@ -18,8 +18,8 @@ const INITIAL_FORM_DATA = {
   desc: "",
   author: "",
   job: "",
-  image: "",
-  photo: "",
+  image: "", 
+  photo: "", 
 };
 
 /* HELPERS */
@@ -27,58 +27,35 @@ const isEmpty = (v) => typeof v !== "string" || v.trim().length === 0;
 
 const isValidUrl = (value) => {
   try {
-    new URL(value);
-    return true;
+    const u = new URL(value);
+    return u.protocol === "http:" || u.protocol === "https:";
   } catch {
     return false;
   }
 };
 
-/* IMG HELPERS */
-const toDataUrl = (value) => {
-  if (!value || typeof value !== "string") return "";
-  if (value.startsWith("data:image/")) return value;
-
-  // detect format
-  if (value.startsWith("iVBORw0")) return `data:image/png;base64,${value}`; // PNG
-  if (value.startsWith("/9j/")) return `data:image/jpeg;base64,${value}`; // JPG
-
-  // fallback
-  return `data:image/jpeg;base64,${value}`;
+//  dataURL o URL
+const isValidImageValue = (value) => {
+  if (!value || typeof value !== "string") return false;
+  const v = value.trim();
+  if (v.startsWith("data:image/")) return true;
+  return isValidUrl(v);
 };
 
-const toPureBase64 = (value) => {
+//  base64 
+const toPureBase64IfDataUrl = (value) => {
   if (!value || typeof value !== "string") return "";
-  const base = value.includes(",") ? value.split(",")[1] : value;
-  return base.replace(/\s/g, "").trim();
-};
+  const v = value.trim();
 
-const normalizeToJpegBase64 = async (value, { maxWidth = 900, quality = 0.8 } = {}) => {
-  const dataUrl = toDataUrl(value);
-  if (!dataUrl) return "";
+  //  data:image/...;base64,AAAA
+  if (v.startsWith("data:image/")) {
+    const parts = v.split(",");
+    const b64 = parts[1] ?? "";
+    return b64.replace(/\s/g, "");
+  }
 
-  const img = await new Promise((resolve, reject) => {
-    const image = new Image();
-    image.onload = () => resolve(image);
-    image.onerror = () => reject(new Error("No pude cargar la imagen."));
-    image.src = dataUrl;
-  });
-
-  const scale = Math.min(1, maxWidth / img.width);
-  const w = Math.max(1, Math.round(img.width * scale));
-  const h = Math.max(1, Math.round(img.height * scale));
-
-  const canvas = document.createElement("canvas");
-  canvas.width = w;
-  canvas.height = h;
-
-  const ctx = canvas.getContext("2d");
-  ctx.fillStyle = "#fff";
-  ctx.fillRect(0, 0, w, h);
-  ctx.drawImage(img, 0, 0, w, h);
-
-  const jpegDataUrl = canvas.toDataURL("image/jpeg", quality);
-  return toPureBase64(jpegDataUrl);
+  // URL
+  return v;
 };
 
 function FormPage() {
@@ -129,41 +106,46 @@ function FormPage() {
       return;
     }
 
-    // Validations URLs
-    if (!isValidUrl(formData.repo.trim())) {
+    const repo = formData.repo.trim();
+    const demo = formData.demo.trim();
+    const image = formData.image.trim();
+    const photo = formData.photo.trim();
+
+    if (!isValidUrl(repo)) {
       setErrorMessage("La URL del repositorio no parece válida.");
       return;
     }
-    if (!isValidUrl(formData.demo.trim())) {
+    if (!isValidUrl(demo)) {
       setErrorMessage("La URL de la demo no parece válida.");
+      return;
+    }
+
+    // dataURL o URL
+    if (!isValidImageValue(image)) {
+      setErrorMessage("La imagen (avatar) no parece válida. Súbela de nuevo.");
+      return;
+    }
+    if (!isValidImageValue(photo)) {
+      setErrorMessage("La foto del proyecto no parece válida. Súbela de nuevo.");
       return;
     }
 
     setIsLoading(true);
 
     try {
-      // Normalize img to jpg base64 
-      const authorImageBase64 = await normalizeToJpegBase64(formData.image, {
-        maxWidth: 900,
-        quality: 0.8,
-      });
-
-      const projectPhotoBase64 = await normalizeToJpegBase64(formData.photo, {
-        maxWidth: 1200,
-        quality: 0.8,
-      });
-
       const payload = {
         name: formData.name.trim(),
         slogan: formData.slogan.trim(),
         technologies: formData.technologies.trim(),
-        repo: formData.repo.trim(),
-        demo: formData.demo.trim(),
+        repo,
+        demo,
         desc: formData.desc.trim(),
-        autor: formData.author.trim(), 
+        autor: formData.author.trim(),
         job: formData.job.trim(),
-        image: authorImageBase64, 
-        photo: projectPhotoBase64, 
+
+        // base64
+        image: toPureBase64IfDataUrl(image),
+        photo: toPureBase64IfDataUrl(photo),
       };
 
       const data = await createProjectCard(payload);
@@ -182,7 +164,7 @@ function FormPage() {
 
       setResultUrl(url);
     } catch (err) {
-      setErrorMessage(err.message || "Error inesperado al crear la tarjeta.");
+      setErrorMessage(err?.message || "Error inesperado al crear la tarjeta.");
     } finally {
       setIsLoading(false);
     }
@@ -206,7 +188,7 @@ function FormPage() {
             {isLoading && <p>Creando tarjeta…</p>}
 
             {!isLoading && errorMessage && (
-              <p className="form-result__error"> {errorMessage}</p>
+              <p className="form-result__error">{errorMessage}</p>
             )}
 
             {!isLoading && resultUrl && (

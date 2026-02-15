@@ -3,9 +3,8 @@ import "../styles/App.scss";
 import Header from "./Header";
 import Landing from "./Landing/Landing";
 import { Routes, Route } from "react-router-dom";
-
-//Borrar antes de mergear
 import FormPage from "../Pages/formPage";
+
 
 
 function App() {
@@ -14,10 +13,10 @@ function App() {
 
 
       <Header />
-      <FormPage />
 
       <Routes>
         <Route path="/" element={<Landing />}></Route>
+        <Route path="/projects" element={<FormPage />}></Route>
       </Routes>
     </div>
   );
