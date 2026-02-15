@@ -1,39 +1,33 @@
 @use "../styles/variables" as vars;
 
 
+/* CONTENEDOR GRID */
 
-
-/* GRID DE CARDS */
-
+.h1 {
+  color: var(--color-dark);
+  margin-left: 2rem;
+  margin-top: 2rem;
+}
 .cardlist {
-  list-style: none;
-  display: flex;
-  gap: 30px;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 5rem;
+  margin-left: 2rem;
+}
+
+/* CARD INDIVIDUAL */
+.card {
   background-color: var(--color-dark);
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 1.25rem;
+  box-shadow: 0 0.6rem 2rem rgba(0, 0, 0, 0.4);
   color: var(--color-white);
+  padding: 15px;
+  text-align: center;
 }
-
-.cardlist-container_id {
-  color: white;
-}
-
-/* IMAGEN */
 
 .cardlist-container_image {
-  width: 50%;
-  height: 50%;
+  width: 10rem;
   object-fit: cover;
-}
-
-/* CONTENIDO */
-
-.card-name {
-  color: var(--color-white);
-  margin-bottom: 15px;
-  font-family: var(--font-base2);
-  font-size: 1.3rem;
+  border-radius: 0.6rem;
 }

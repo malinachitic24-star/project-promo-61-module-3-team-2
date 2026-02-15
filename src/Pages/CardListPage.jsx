@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import Card from "../components/Card";
+import  "../styles/Card.scss"
 
  const CardList = () => {
 const [cards, setCards] = useState([]);
@@ -26,8 +27,9 @@ const [cards, setCards] = useState([]);
 
 
  return (
-  
- <div> 
+    <>
+ <h1>Lista de proyectos</h1>
+ <div className="cardlist"> 
        {cards.map((card) => (
         <Link key={card.id} to={`/create/${card.id}`}>
           <Card
@@ -36,7 +38,7 @@ const [cards, setCards] = useState([]);
             name={card.name}
             gender={card.gender}
             actor={card.actor}
-            img={card.img}
+            image={card.image}
           />
         </Link>
           
@@ -44,7 +46,7 @@ const [cards, setCards] = useState([]);
       }
       
  </div>
-
+</>
  )
 
 
