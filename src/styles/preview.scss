@@ -1,4 +1,4 @@
-@use "../styles/variables" as vars; 
+@use "../styles/variables" as vars;
 
 
 
@@ -6,59 +6,59 @@
   min-height: 100%;
   display: grid;
   place-items: center;
-  padding: 1.5rem 1rem;
+  padding: 0.5rem 1rem;
   color: rgb(42, 19, 83);
   text-align: center;
   opacity: 0.9;
-
 }
+
+/* CARD  */
 
 .preview__card {
   width: 100%;
-  max-width: 28rem;
+  max-width: 30rem;
   position: relative;
-  overflow: visible;
 }
 
-/* Header */
+/*  HEADER (PROJECT IMAGE)  */
+
 .preview__header {
   position: relative;
   z-index: 0;
-  height: 18rem;
-  overflow: visible;
+  height: 24rem;
+  overflow: hidden; 
   display: grid;
   place-items: center;
+
 }
 
 .preview__project-img {
-  width: min(92%, 24rem);
+  width: 100%;
   height: 100%;
-  max-height: 26rem;
   object-fit: cover;
   display: block;
   box-shadow: 0 1.25rem 2.5rem rgba(0, 0, 0, 0.45);
 }
 
+/*  BODY */
 
 .preview__body {
-    display: grid;
-  place-items: center;
   position: relative;
   z-index: 2;
-  margin-top: 6rem;
-  width: min(80%, 24.5rem);
+
+  transform: translateY(-2rem); 
+  width: min(85%, 24.5rem);
   margin-left: auto;
   margin-right: auto;
 
   background: rgba(255, 255, 255, 0.96);
   border-radius: 1.5rem 1.5rem 0 0;
   padding: 1.25rem 1.25rem 0.9rem;
+
   box-shadow: 0 1.1rem 2.2rem rgba(0, 0, 0, 0.28);
 }
 
-
 .preview__body::before {
-  content: "Personal Project Card";
   display: block;
   text-align: center;
   font-size: 0.75rem;
@@ -93,16 +93,18 @@
   opacity: 0.9;
 }
 
+/* LINKS */
 
 .preview__links {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   gap: 0.6rem;
   flex-wrap: wrap;
-  
+
 }
 
-.preview__link, .preview__links-empty{
+.preview__link,
+.preview__links-empty {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -127,23 +129,24 @@
 
 .preview__links-empty {
   margin: 0;
-  font-size: 0.9rem;
   opacity: 0.65;
   text-align: right;
 }
 
-/* Footer */
+/* FOOTER */
+
 .preview__footer {
   position: relative;
   z-index: 2;
 
-  width: min(80%, 24.5rem);
+  transform: translateY(-2rem); 
+
+  width: min(85%, 24.5rem);
   margin-left: auto;
   margin-right: auto;
 
   background: rgba(255, 255, 255, 0.96);
   border-radius: 0 0 1.5rem 1.5rem;
-
   padding: 1.25rem;
 
   box-shadow: 0 1.1rem 2.2rem rgba(0, 0, 0, 0.28);
@@ -154,15 +157,13 @@
   gap: 0.75rem;
 }
 
-
 .preview__author-img {
-  width: 5rem;
-  height: 5rem;
+  width: 3rem;
+  height: 3rem;
   border-radius: 999rem;
   object-fit: cover;
   flex-shrink: 0;
 }
-
 
 .preview__author-info {
   display: flex;
@@ -179,11 +180,11 @@
 
 .preview__job {
   margin: 0;
-  margin-left: 1.5rem;
   font-size: 0.8rem;
   opacity: 0.7;
 }
 
+/*  DESKTOP */
 
 @media (min-width: 48rem) {
   .preview__card {
@@ -191,26 +192,17 @@
   }
 
   .preview__header {
-    height: 20rem;
-  }
-
-  .preview__project-img {
-  width: min(80%, 30rem);
-  height: max-content;
-  max-height: 35rem;
-  object-fit: cover;
-  display: block;
-
+    height: 34rem;
   }
 
   .preview__body {
-    margin-top: 10rem;
+    transform: translateY(-3rem);
+    width: min(70%, 26rem);
   }
 
-  .preview__body,
   .preview__footer {
-    width: min(70%, 24rem);
-    
+    transform: translateY(-3rem);
+    width: min(70%, 26rem);
   }
 
   .preview__title {
