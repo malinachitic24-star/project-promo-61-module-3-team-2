@@ -45,6 +45,12 @@
   letter-spacing: 0.02rem;
 }
 
+h1 {
+  font-family: var(--font-base2);
+  padding: 1.8rem 1.2rem;
+  color: rgb(179, 146, 241);
+}
+
 /* Nombre más destacado */
 .card h3:nth-child(2) {
   font-size: 1.2rem;
