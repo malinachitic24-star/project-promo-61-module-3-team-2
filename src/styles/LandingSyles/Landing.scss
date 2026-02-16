@@ -1,49 +1,49 @@
-@use "../../styles/variables.scss" as vars;
+@use "../../styles/variables.scss";
 
-  .landing {
-  min-height: 100vh;
+.landing {
   padding: 24px 16px 48px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: auto;
 
-  // Fondo tipo galaxia (sin imagen)
-  background:
-    radial-gradient(800px 500px at 50% 20%, rgba(190, 160, 255, 0.22), transparent 60%),
-    radial-gradient(700px 500px at 10% 10%, rgba(120, 180, 255, 0.15), transparent 55%),
-    radial-gradient(900px 600px at 90% 70%, rgba(90, 60, 180, 0.25), transparent 60%),
-    linear-gradient(180deg, rgba(18, 10, 32, 1) 0%, rgba(10, 8, 22, 1) 100%);
-  
-
-  color: #fff;
-}
-
-.landing::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.55;
-
+  color: var(--color-white);
   background-image:
-   radial-gradient(circle at 3% 15%, #fff 1px, transparent 2px),
-    radial-gradient(circle at 8% 72%, #fff 1px, transparent 2px),
-    radial-gradient(circle at 12% 40%, #fff 1px, transparent 2px),
-    radial-gradient(circle at 17% 88%, #fff 1px, transparent 2px),
-    radial-gradient(circle at 22% 25%, #fff 1px, transparent 2px),
-    radial-gradient(circle at 28% 60%, #fff 1px, transparent 2px),
-    radial-gradient(circle at 34% 12%, #fff 1px, transparent 2px),
-    radial-gradient(circle at 39% 78%, #fff 1px, transparent 2px),
-    radial-gradient(circle at 45% 33%, #fff 1px, transparent 2px),
-    radial-gradient(circle at 51% 90%, #fff 1px, transparent 2px),
-    radial-gradient(circle at 58% 44%, #fff 1px, transparent 2px),
-    radial-gradient(circle at 63% 18%, #fff 1px, transparent 2px),
-    radial-gradient(circle at 69% 72%, #fff 1px, transparent 2px),
-    radial-gradient(circle at 74% 29%, #fff 1px, transparent 2px),
-    radial-gradient(circle at 80% 55%, #fff 1px, transparent 2px),
-    radial-gradient(circle at 86% 12%, #fff 1px, transparent 2px),
-    radial-gradient(circle at 92% 67%, #fff 1px, transparent 2px),
-    radial-gradient(circle at 97% 35%, #fff 1px, transparent 2px);
+    radial-gradient(circle at 20% 30%, white 0 1px, transparent 2px),
+    radial-gradient(circle at 80% 70%, white 0 1.5px, transparent 3px),
+    radial-gradient(circle at 50% 50%, white 0 0.5px, transparent 1px),
+    radial-gradient(circle at 10% 80%, white 0 1px, transparent 2px),
+    radial-gradient(circle at 90% 20%, white 0 0.5px, transparent 1px),
+    radial-gradient(circle at 13% 67%, white 0 1px, transparent 2px),
+    radial-gradient(circle at 76% 18%, white 0 1.5px, transparent 3px),
+    radial-gradient(circle at 41% 83%, white 0 0.5px, transparent 1px),
+    radial-gradient(circle at 92% 58%, white 0 1px, transparent 2px),
+    radial-gradient(circle at 28% 12%, white 0 0.5px, transparent 1px),
+    radial-gradient(circle at 90% 20%, white 0 0.5px, transparent 1px),
+    radial-gradient(circle at 10% 80%, white 0 1px, transparent 2px),
+    radial-gradient(
+      circle 1300px at 50% 60%,
+      var(--color-dark-lilac) 5%,
+      var(--color-clear-violet) 10%,
+      var(--color-dark-violet) 15%,
+      var(--color-dark) 20%,
+      var(--color-dusk) 30%,
+      var(--color-black-80) 55%
+    );
+  background-repeat:
+    repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat,
+    repeat,repeat,repeat, no-repeat;
+  background-size:
+    230px 765px,
+    397px 365px,
+    234px 567px,
+    708px 369px,
+    398px 968px,
+    460px 983px,
+    942px 340px,
+    875px 280px,
+    789px 579px,
+    961px 234px,
+    120px 385px,
+    300px 320px,
+    cover;
 }
-
