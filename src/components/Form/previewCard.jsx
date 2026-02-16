@@ -1,6 +1,7 @@
 
 /* IMPORTS */
-import placeholderImg from "../../images/PlaceholderPhoto.png";
+import placeholderImg from "../../images/Space2.png";
+import placeholderImg2 from "../../images/placeHolderImg2.png";
 import "../../styles/preview.scss";
 
 
@@ -20,6 +21,11 @@ function PreviewCard({ formData }) {
 
   const safeImage = (value) => {
     const v = typeof value === "string" ? value.trim() : "";
+    return v.length ? v : placeholderImg2;
+  };
+
+    const safePhoto = (value) => {
+    const v = typeof value === "string" ? value.trim() : "";
     return v.length ? v : placeholderImg;
   };
 
@@ -34,7 +40,7 @@ function PreviewCard({ formData }) {
   const safeTech = safeText(technologies, "Tecnologías");
   const safeDesc = safeText(
     desc,
-    "La descripción de tu proyecto aparecerá aquí. Cuéntanos por qué es tan molón tu proyecto"
+    "La descripción de tu proyecto molón aparecerá aquí."
   );
 
   const safeAuthor = safeText(author, "Nombre de la autora");
@@ -44,7 +50,7 @@ function PreviewCard({ formData }) {
   const safeDemo = safeUrl(demo);
 
   const safeAuthorImg = safeImage(image);
-  const safeProjectImg = safeImage(photo);
+  const safeProjectImg = safePhoto(photo);
 
 
   return (
@@ -100,7 +106,7 @@ function PreviewCard({ formData }) {
 
             {!safeRepo && !safeDemo && (
               <p className="preview__links-empty">
-                Añade el repo y/o la demo, aparecerán aquí
+                Links
               </p>
             )}
           </div>

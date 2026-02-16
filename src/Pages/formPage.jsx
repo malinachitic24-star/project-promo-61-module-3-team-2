@@ -19,7 +19,7 @@ const INITIAL_FORM_DATA = {
   author: "",
   job: "",
   image: "", 
-  photo: "", 
+  photo: "",
 };
 
 /* HELPERS */
@@ -34,7 +34,7 @@ const isValidUrl = (value) => {
   }
 };
 
-//  dataURL o URL
+// dataURL o URL
 const isValidImageValue = (value) => {
   if (!value || typeof value !== "string") return false;
   const v = value.trim();
@@ -42,51 +42,30 @@ const isValidImageValue = (value) => {
   return isValidUrl(v);
 };
 
-//  base64 
-const toPureBase64IfDataUrl = (value) => {
-  if (!value || typeof value !== "string") return "";
-  const v = value.trim();
-
-  //  data:image/...;base64,AAAA
-  if (v.startsWith("data:image/")) {
-    const parts = v.split(",");
-    const b64 = parts[1] ?? "";
-    return b64.replace(/\s/g, "");
-  }
-
-  // URL
-  return v;
-};
-
 function FormPage() {
   /* FORM STATE (WITH LOCALSTORAGE) */
   const [formData, setFormData] = useLocalStorage(LS_FORM_KEY, INITIAL_FORM_DATA);
 
-  /* API/UI STATE */
+  /* UI STATE */
   const [isLoading, setIsLoading] = useState(false);
-  const [resultUrl, setResultUrl] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
 
   /* CHANGE HANDLER */
   const handleFormChange = (updatedData) => {
     setFormData(updatedData);
   };
 
-  /* RESET HANDLER  */
+  /* RESET HANDLER */
   const handleResetForm = () => {
     setFormData(INITIAL_FORM_DATA);
-    setResultUrl("");
-    setErrorMessage("");
+    console.clear?.();
+    console.log("🧹 Formulario reseteado.");
   };
 
   /* SUBMIT HANDLER */
   const handleSubmitForm = async () => {
     if (isLoading) return;
 
-    setErrorMessage("");
-    setResultUrl("");
-
-    // Required
+    // Required fields
     const requiredFields = [
       "name",
       "slogan",
@@ -102,35 +81,34 @@ function FormPage() {
 
     const missing = requiredFields.find((k) => isEmpty(formData[k]));
     if (missing) {
-      setErrorMessage(`Te falta completar: ${missing}`);
+      console.warn(`⚠️ Falta completar: ${missing}`);
       return;
     }
 
     const repo = formData.repo.trim();
     const demo = formData.demo.trim();
-    const image = formData.image.trim();
-    const photo = formData.photo.trim();
+    const image = formData.photo.trim();
+    const photo = formData.image.trim();
 
     if (!isValidUrl(repo)) {
-      setErrorMessage("La URL del repositorio no parece válida.");
+      console.warn("⚠️ La URL del repositorio no parece válida.");
       return;
     }
     if (!isValidUrl(demo)) {
-      setErrorMessage("La URL de la demo no parece válida.");
+      console.warn("⚠️ La URL de la demo no parece válida.");
       return;
     }
-
-    // dataURL o URL
     if (!isValidImageValue(image)) {
-      setErrorMessage("La imagen (avatar) no parece válida. Súbela de nuevo.");
+      console.warn("⚠️ La imagen (avatar) no parece válida. Súbela de nuevo.");
       return;
     }
     if (!isValidImageValue(photo)) {
-      setErrorMessage("La foto del proyecto no parece válida. Súbela de nuevo.");
+      console.warn("⚠️ La foto del proyecto no parece válida. Súbela de nuevo.");
       return;
     }
 
     setIsLoading(true);
+    console.log("⏳ Creando tarjeta...");
 
     try {
       const payload = {
@@ -140,12 +118,10 @@ function FormPage() {
         repo,
         demo,
         desc: formData.desc.trim(),
-        autor: formData.author.trim(),
+        autor: formData.author.trim(), 
         job: formData.job.trim(),
-
-        // base64
-        image: toPureBase64IfDataUrl(image),
-        photo: toPureBase64IfDataUrl(photo),
+        image, 
+        photo, 
       };
 
       const data = await createProjectCard(payload);
@@ -159,12 +135,16 @@ function FormPage() {
         "";
 
       if (!url) {
+        console.error("❌ Respuesta API:", data);
         throw new Error("La API respondió OK, pero no encuentro la URL de la tarjeta.");
       }
 
-      setResultUrl(url);
+      console.log("✅ Tarjeta creada:", url);
+
+
+      window.location.assign(url);
     } catch (err) {
-      setErrorMessage(err?.message || "Error inesperado al crear la tarjeta.");
+      console.error("❌ Error creando tarjeta:", err);
     } finally {
       setIsLoading(false);
     }
@@ -182,24 +162,6 @@ function FormPage() {
             onResetForm={handleResetForm}
             isLoading={isLoading}
           />
-
-          {/* RESULTADO API */}
-          <div className="form-result" aria-live="polite">
-            {isLoading && <p>Creando tarjeta…</p>}
-
-            {!isLoading && errorMessage && (
-              <p className="form-result__error">{errorMessage}</p>
-            )}
-
-            {!isLoading && resultUrl && (
-              <p className="form-result__ok">
-                Tu tarjeta está aquí:{" "}
-                <a href={resultUrl} target="_blank" rel="noreferrer">
-                  {resultUrl}
-                </a>
-              </p>
-            )}
-          </div>
         </section>
 
         {/* LIVE PREVIEW */}
