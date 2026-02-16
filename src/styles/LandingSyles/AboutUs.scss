@@ -16,7 +16,7 @@
   color: #fff;
 }
 
-
+//HEADER//
 
 .about-us-title {
     display: flex;
@@ -30,9 +30,9 @@
 }
 
 .about-us-text {
-  margin: 0 auto 20px;
-  max-width: 320px;
-  font-size: 15px;
+  margin: 0 auto 2rem;
+  max-width: 33rem;
+  font-size: 1.5rem;
   line-height: 1.45;
   opacity: 0.8;
 
@@ -40,12 +40,14 @@
         
 }
 
+//CARD//
 .about-us-container-card{
-  padding-top: 36px;
-  text-align: center;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  border: 2px solid red;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px #4b286d14;
+    padding: 1.5rem 1rem;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
 }
