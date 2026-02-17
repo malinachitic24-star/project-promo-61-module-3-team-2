@@ -9,10 +9,10 @@ function Hero() {
       <h1 className="hero__title">Women in Tech Space</h1>
       <p className="hero__text"> Consigue tu match empresarial. Trabajamos duro por un mundo más igualitario</p>
       <div className="hero__actions">
-        <p>¿Eres empresa y buscas la candidata perfecta?</p>
-        <HeroButton text="Ver proyectos" to="/projects" />
         <p>¿Eres creadora y quieres mostrar tus proyectos?</p>
-        <HeroButton text="Crear proyecto" to="/create" />
+        <HeroButton text="Crear proyecto" to="/projects" />
+        <p>¿Eres empresa y buscas la candidata perfecta?</p>
+        <HeroButton text="Ver proyecto" to="/create" />
       </div>
       <img src={HeroImage} className="hero__image"></img>
     </section>
