@@ -18,7 +18,7 @@ const INITIAL_FORM_DATA = {
   desc: "",
   author: "",
   job: "",
-  image: "", 
+  image: "",
   photo: "",
 };
 
@@ -44,7 +44,10 @@ const isValidImageValue = (value) => {
 
 function FormPage() {
   /* FORM STATE (WITH LOCALSTORAGE) */
-  const [formData, setFormData] = useLocalStorage(LS_FORM_KEY, INITIAL_FORM_DATA);
+  const [formData, setFormData] = useLocalStorage(
+    LS_FORM_KEY,
+    INITIAL_FORM_DATA,
+  );
 
   /* UI STATE */
   const [isLoading, setIsLoading] = useState(false);
@@ -103,7 +106,9 @@ function FormPage() {
       return;
     }
     if (!isValidImageValue(photo)) {
-      console.warn("⚠️ La foto del proyecto no parece válida. Súbela de nuevo.");
+      console.warn(
+        "⚠️ La foto del proyecto no parece válida. Súbela de nuevo.",
+      );
       return;
     }
 
@@ -118,10 +123,10 @@ function FormPage() {
         repo,
         demo,
         desc: formData.desc.trim(),
-        autor: formData.author.trim(), 
+        autor: formData.author.trim(),
         job: formData.job.trim(),
-        image, 
-        photo, 
+        image,
+        photo,
       };
 
       const data = await createProjectCard(payload);
@@ -136,11 +141,12 @@ function FormPage() {
 
       if (!url) {
         console.error("❌ Respuesta API:", data);
-        throw new Error("La API respondió OK, pero no encuentro la URL de la tarjeta.");
+        throw new Error(
+          "La API respondió OK, pero no encuentro la URL de la tarjeta.",
+        );
       }
 
       console.log("✅ Tarjeta creada:", url);
-
 
       window.location.assign(url);
     } catch (err) {

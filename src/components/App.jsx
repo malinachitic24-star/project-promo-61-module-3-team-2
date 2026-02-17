@@ -8,27 +8,19 @@ import Landing from "./Landing/Landing.jsx";
 import Card from "../components/Card.jsx";
 import CardListPage from "../Pages/CardListPage.jsx";
 import CardDetailPage from "../Pages/CardDetailPage.jsx";
-
+import Footer from "./Footer.jsx";
 
 function App() {
-
-
-
   return (
-<>
-    <div className="body">
-      <Header />
-    </div>
-    
-    <Routes>
-      <Route path="/" element={<Landing />} />
-      <Route path="/create" element={<CardListPage/>}/>
-      <Route path="/create/:id" element={<CardDetailPage/>}/>
-      <Route path="/projects" element={<FormPage />}></Route>
-      <Route path="/aboutus" element={<AboutUs></AboutUs>}></Route>
-    </Routes>
-
-   
+    <>
+        <Header />
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/create" element={<CardListPage />} />
+        <Route path="/create/:id" element={<CardDetailPage />} />
+        <Route path="/projects" element={<FormPage />}></Route>
+        <Route path="/aboutus" element={<AboutUs></AboutUs>}></Route>
+      </Routes>
     </>
   );
 }

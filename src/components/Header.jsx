@@ -8,7 +8,6 @@ function Header() {
         <i className="fa-solid fa-laptop-code header__icon"></i>
         <h1 className="header__title-brand">Global Tech</h1>
       </div>
-
       <div className="header__right">
         <img
           src={adalabLogo}

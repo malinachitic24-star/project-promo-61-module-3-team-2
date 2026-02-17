@@ -1,6 +1,7 @@
 import "./../styles/LandingSyles/AboutUs.scss";
 import Cards from "./propts/Cards";
 import AstroLogo from "../images/avatar.webp";
+import Footer from "./Footer";
 
 function AboutUs (){
     const company= [
@@ -29,6 +30,7 @@ function AboutUs (){
 
 
     return(
+        <>
         <main className="about-us">
         <section>
             <div className="container-about-us">
@@ -51,14 +53,14 @@ function AboutUs (){
                             tech={persona.tech}
                          />
                     ))}
-                        
-
-                   
                 </div>
             </div>
 
         </section>
+        
         </main>
+        <Footer></Footer>
+        </>
     )
 }
 
