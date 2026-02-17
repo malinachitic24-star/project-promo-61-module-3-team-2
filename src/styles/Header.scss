@@ -1,29 +1,39 @@
-@use "../styles/variables" as vars;
+@use "../styles/variables";
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: var(--color-dark);
-}
+  padding-left: clamp(1.5rem, 3vw, 3rem);
+  padding-right: clamp(0.5rem, 2vw, 1.5rem);
+  max-height: clamp(5rem, 10vw, 5rem);
 
-.header__left {
+
+  &__left {
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
 
-.header__icon {
-  font-size: 3.1rem;
+&__icon {
+  font-size: clamp(2.2rem, 12vw, 2.5rem);
   color: var(--color-white);
+  
 }
 
-.header__title {
-  font: var(--font-title-brand);
+&__title-brand {
+  font-family: var(--font-base2);
   text-transform: capitalize;
   color: var(--color-white-50);
+  font-size: clamp(0.8rem, 3vw, 1rem);
+  font-weight: lighter;
 }
 
-.header__logo {
-  height: 100px;
+&__logo {
+  height: clamp(6.25rem, 7vw, 10rem);
   color: var(--color-white);
+  padding-top: 4px;
 }
+
+}
+

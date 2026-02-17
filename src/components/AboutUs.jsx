@@ -4,6 +4,7 @@ import CrisLogo from "../images/imagen.cris.png";
 import NidiaLogo from "../images/imagen.nidia.png"
 import SorayaLogo from "../images/imagen.soraya.png"
 import MalinaLogo from "../images/imagen.malina.png"
+import Footer from "./Footer";
 
 function AboutUs (){
     const company= [
@@ -40,6 +41,7 @@ function AboutUs (){
 
 
     return(
+        <>
         <main className="about-us">
         <section>
             <div className="container-about-us">
@@ -64,14 +66,14 @@ function AboutUs (){
                             city={persona.city}
                          />
                     ))}
-                        
-
-                   
                 </div>
             </div>
 
         </section>
+        
         </main>
+        <Footer></Footer>
+        </>
     )
 }
 
