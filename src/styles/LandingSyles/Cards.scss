@@ -1,0 +1,47 @@
+@use "../variables.scss" as vars;
+
+.card_container{
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    gap:2rem;
+    margin-bottom:1rem;
+    
+}
+
+//Cuerpo//
+.card_container_head{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+
+    .card_title{
+        text-align: center;
+        margin: 0 0 0.35rem;
+        font-size: 1.5rem;
+        line-height: 1.05;
+        font-weight: 800;
+        color: var(--color-purple);
+    }
+
+    .card_project-img{
+        
+        width: 7rem;
+        height: 10rem;
+        border-radius: 999rem;
+        object-fit: cover;
+        border: 2px solid yellow;
+    }
+}
+
+.card_container_info{
+
+    .card_tech{
+        color: var(--color-purple);
+    }
+}
