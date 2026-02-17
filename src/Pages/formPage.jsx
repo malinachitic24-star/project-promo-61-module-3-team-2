@@ -8,6 +8,7 @@ import { createProjectCard } from "../services/api";
 /* LOCAL STORAGE KEYS */
 const LS_FORM_KEY = "projectFormData";
 
+
 /* INITIAL STATE */
 const INITIAL_FORM_DATA = {
   name: "",

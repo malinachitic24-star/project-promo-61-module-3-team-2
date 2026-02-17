@@ -1,18 +1,29 @@
-import  "../styles/Card.scss"
+import "../styles/Card.scss";
 
-const Card = ({id, name, species, gender, actor, image, onSelectedCard}) => {
-    return <div className="card" >
-        
-        <h3 className="cardlist-container_id">Id: {id}</h3>
-        <h3 className="cardlist-container_name">Name: {name}</h3>
-        <h3 className="cardlist-container_species">Species:{species}</h3>
-        <h3 className="cardlist-container_gender">Gender: {gender}</h3>
-        <h3 className="cardlist-container_actor">Actor: {actor}</h3>
-        <img className="cardlist-container_image" src={image}></img>
+const Card = ({
+  id,
+  name,
+  slogan,
+  technologies,
+  author,
+  job,
+  image,
+  onSelect,
+  onDelete,
+}) => {
+  return (
+    <div className="card">
+      <div onClick={() => onSelect(id)} style={{ cursor: "pointer" }}>
+        <h3>{name}</h3>
+        <p>{slogan}</p>
+        <p>{technologies}</p>
+        <p>{author} - {job}</p>
+        <img src={image} alt={name} width="150" />
+      </div>
+
+      <button onClick={() => onDelete(id)}>🗑 Borrar</button>
     </div>
+  );
+};
 
-}
-
-
-export default Card;
-
+export default Card
