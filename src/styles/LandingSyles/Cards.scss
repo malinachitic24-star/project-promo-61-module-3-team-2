@@ -7,9 +7,16 @@
     grid-template-columns: 1fr;
     background: rgba(255, 255, 255, 0.96);
     border-radius: 1.5rem;
-    padding: 2rem;
+    padding: 3rem;
     gap:2rem;
     margin-bottom:1rem;
+
+        @media (min-width: 48rem){
+            width:25rem;
+            height: 30rem;
+            display: flex;
+            flex-direction: column;
+        }
     
 }
 
@@ -17,31 +24,33 @@
 .card_container_head{
    display: flex;
    flex-direction: column;
-   justify-content: center;
    align-items: center;
+   
 
     .card_title{
         text-align: center;
-        margin: 0 0 0.35rem;
         font-size: 1.5rem;
         line-height: 1.05;
         font-weight: 800;
         color: var(--color-purple);
+        margin-bottom:1.5rem;
     }
 
     .card_project-img{
         
         width: 7rem;
-        height: 10rem;
+        height: 12rem;
         border-radius: 999rem;
         object-fit: cover;
-        border: 2px solid yellow;
+        border: 2px solid var(--color-purple);
     }
 }
 
 .card_container_info{
-
-    .card_tech{
+    
+    .card_tech, .card_description, .card_city{
         color: var(--color-purple);
+        text-align: center;
+        margin-top: 2rem;
     }
 }

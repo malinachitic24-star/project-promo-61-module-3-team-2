@@ -23,7 +23,7 @@
     flex-direction: column;
     text-align: center;
     margin: 0 0 10px;
-    font-size: 42px;
+    font-size: 5rem;
     line-height: 1.05;
     font-weight: 800;
     letter-spacing: -0.02em;
@@ -35,14 +35,16 @@
   font-size: 1.5rem;
   line-height: 1.45;
   opacity: 0.8;
+  text-align: center;
 
-    //@media screen {min-width: 728px;
+    @media (min-width: 48rem){
+      max-width: 100vw;
+    }
         
 }
 
 //CARD//
 .about-us-container-card{
-  border: 2px solid red;
     border-radius: 16px;
     box-shadow: 0 2px 8px #4b286d14;
     padding: 1.5rem 1rem;
@@ -50,4 +52,13 @@
     height: auto;
     display: flex;
     flex-direction: column;
+
+      @media (min-width: 48rem){
+            width:25rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap:9.5rem;
+           
+        }
 }
