@@ -1,7 +1,7 @@
 import useLocalStorage from "../services/localStorage";
 import Card from "../components/Card";
 import { useNavigate } from "react-router-dom";
-
+import Footer from "../components/Footer.jsx";
 const LS_CARDS_KEY = "projectCards";
 
 function ProjectsPage() {
@@ -17,27 +17,28 @@ function ProjectsPage() {
     setCards(filtered);
   };
 
-console.log(cards);
+  console.log(cards);
 
   return (
-    <div>
-      <h1>Lista de proyectos</h1>
+    <>
+      <div className="proyect__page">
+        <h1>Lista de proyectos</h1>
 
-      {cards.length === 0 && <p>No hay proyectos todavía</p>}
+        {cards.length === 0 && <p>No hay proyectos todavía</p>}
 
-      <div className="cardlist">
-        {cards.map((card) => (
-          <Card
-            key={card.id}
-            {...card}
-            onSelect={handleSelect}
-            onDelete={handleDelete}
-          />
-        ))}
+        <div className="cardlist">
+          {cards.map((card) => (
+            <Card
+              key={card.id}
+              {...card}
+              onSelect={handleSelect}
+              onDelete={handleDelete}
+            />
+          ))}
+        </div>
       </div>
-
-      
-    </div>
+      <Footer></Footer>
+    </>
   );
 }
 
