@@ -4,6 +4,8 @@ import ProjectForm from "../components/Form/form";
 import PreviewCard from "../components/Form/previewCard";
 import useLocalStorage from "../services/localStorage";
 import { createProjectCard } from "../services/api";
+import Footer from "../components/Footer.jsx";
+import HeaderNav from "../components/HeaderNav.jsx";
 
 /* LOCAL STORAGE KEYS */
 const LS_FORM_KEY = "projectFormData";
@@ -157,6 +159,8 @@ function FormPage() {
   };
 
   return (
+    <>
+    <HeaderNav></HeaderNav>
     <main className="form-page">
       <div className="form-layout">
         {/* FORM */}
@@ -175,7 +179,11 @@ function FormPage() {
           <PreviewCard formData={formData} />
         </aside>
       </div>
+        
     </main>
+    <Footer></Footer>
+    </>
+
   );
 }
 
