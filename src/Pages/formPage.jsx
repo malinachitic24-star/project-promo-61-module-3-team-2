@@ -10,7 +10,6 @@ import Footer from "../components/Footer.jsx";
 const LS_FORM_KEY = "projectFormData";
 const LS_CARDS_KEY = "projectCards";
 
-
 /* INITIAL STATE */
 const INITIAL_FORM_DATA = {
   name: "",
@@ -47,13 +46,11 @@ const isValidImageValue = (value) => {
 
 function FormPage() {
   /* FORM STATE (WITH LOCALSTORAGE) */
-  const [formData, setFormData] = useLocalStorage(
-    LS_FORM_KEY,
-    INITIAL_FORM_DATA,
-  );
+  const [formData, setFormData] = useLocalStorage(LS_FORM_KEY, INITIAL_FORM_DATA);
 
- 
-  const [cards, setCards] = useLocalStorage(LS_CARDS_KEY, []);
+  /* CARDS STATE (WITH LOCALSTORAGE) */
+  const [ setCards] = useLocalStorage(LS_CARDS_KEY, []);
+
   /* UI STATE */
   const [isLoading, setIsLoading] = useState(false);
 
@@ -66,14 +63,13 @@ function FormPage() {
   const handleResetForm = () => {
     setFormData(INITIAL_FORM_DATA);
     console.clear?.();
-    console.log("🧹 Formulario reseteado.");
+    console.log("Formulario reseteado.");
   };
 
   /* SUBMIT HANDLER */
   const handleSubmitForm = async () => {
     if (isLoading) return;
 
-    // Required fields
     const requiredFields = [
       "name",
       "slogan",
@@ -107,13 +103,11 @@ function FormPage() {
       return;
     }
     if (!isValidImageValue(image)) {
-      console.warn("La imagen (avatar) no parece válida. Súbela de nuevo.");
+      console.warn("La imagen (avatar) no parece válida.");
       return;
     }
     if (!isValidImageValue(photo)) {
-      console.warn(
-        "La foto del proyecto no parece válida. Súbela de nuevo.",
-      );
+      console.warn("La foto del proyecto no parece válida.");
       return;
     }
 
@@ -128,7 +122,7 @@ function FormPage() {
         repo,
         demo,
         desc: formData.desc.trim(),
-        autor: formData.author.trim(),
+        autor: formData.author.trim(), 
         job: formData.job.trim(),
         image,
         photo,
@@ -146,20 +140,27 @@ function FormPage() {
 
       if (!url) {
         console.error("Respuesta API:", data);
-        throw new Error(
-          "La API respondió OK, pero no encuentro la URL de la tarjeta.",
-        );
+        throw new Error("La API respondió OK, pero no encuentro la URL de la tarjeta.");
       }
-   const newCard = {
-   id: Date.now(),
-   ...formData,
-   };
 
-setCards([...cards, newCard]);
+      const newCard = {
+        id: Date.now(),
+        ...formData,
+      };
+
+      // SAVE BEFORE SEND
+      setCards((prev) => {
+        const safePrev = Array.isArray(prev) ? prev : [];
+        const next = [...safePrev, newCard];
+        localStorage.setItem(LS_CARDS_KEY, JSON.stringify(next));
+        return next;
+      });
+
+      console.log("✅ Guardada en localStorage:", newCard);
       console.log("Tarjeta creada:", url);
 
+      // URL API
       window.location.assign(url);
-
     } catch (err) {
       console.error("Error creando tarjeta:", err);
     } finally {
@@ -169,29 +170,28 @@ setCards([...cards, newCard]);
 
   return (
     <>
-    <main className="form-page">
-      <div className="form-layout">
-        {/* FORM */}
-        <section className="form-layout__form">
-          <ProjectForm
-            formData={formData}
-            onChangeForm={handleFormChange}
-            onSubmitForm={handleSubmitForm}
-            onResetForm={handleResetForm}
-            isLoading={isLoading}
-          />
-        </section>
+      <main className="form-page">
+        <div className="form-layout">
+          {/* FORM */}
+          <section className="form-layout__form">
+            <ProjectForm
+              formData={formData}
+              onChangeForm={handleFormChange}
+              onSubmitForm={handleSubmitForm}
+              onResetForm={handleResetForm}
+              isLoading={isLoading}
+            />
+          </section>
 
-        {/* LIVE PREVIEW */}
-        <aside className="form-layout__preview">
-          <PreviewCard formData={formData} />
-        </aside>
-      </div>
-        
-    </main>
-    <Footer></Footer>
+          {/* LIVE PREVIEW */}
+          <aside className="form-layout__preview">
+            <PreviewCard formData={formData} />
+          </aside>
+        </div>
+      </main>
+
+      <Footer />
     </>
-
   );
 }
 

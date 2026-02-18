@@ -7,7 +7,7 @@ const Card = ({
   technologies,
   author,
   job,
-  image,
+  photo,
   onSelect,
   onDelete,
 }) => {
@@ -20,7 +20,7 @@ const Card = ({
         <p>{slogan}</p>
         <p>{technologies}</p>
         <p>{author} - {job}</p>
-        <img src={image} alt={name} width="150" />
+        <img src={photo} alt={name} width="150" />
       </div>
 
       <button onClick={() => onDelete(id)}>🗑 Borrar</button>

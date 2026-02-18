@@ -21,7 +21,7 @@ function ProjectDetail() {
       <p>{project.desc}</p>
       <p>{project.technologies}</p>
       <p>{project.author} - {project.job}</p>
-      <img src={project.image} alt={project.name} width="200" />
+      <img src={project.photo} alt={project.name} width="200" />
 
       <br />
       <button onClick={() => navigate("/create")}>
