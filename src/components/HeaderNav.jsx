@@ -77,10 +77,12 @@ function HeaderNav() {
       </aside>
 
       {/* Brand */}
+      <NavLink to="/" className="logo__link">
       <div className="header__left">
         <i className="fa-solid fa-laptop-code header__icon--nav" aria-hidden="true"></i>
         <h1 className="header__title-brand">Global Tech</h1>
       </div>
+      </NavLink>
 
       <div className="header__right">
         <img src={adalabLogo} alt="Logo Adalab" className="header__logo--nav" />

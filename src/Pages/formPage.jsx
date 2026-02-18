@@ -89,7 +89,7 @@ function FormPage() {
 
     const missing = requiredFields.find((k) => isEmpty(formData[k]));
     if (missing) {
-      console.warn(`⚠️ Falta completar: ${missing}`);
+      console.warn(`Falta completar: ${missing}`);
       return;
     }
 
@@ -99,20 +99,20 @@ function FormPage() {
     const photo = formData.image.trim();
 
     if (!isValidUrl(repo)) {
-      console.warn("⚠️ La URL del repositorio no parece válida.");
+      console.warn("La URL del repositorio no parece válida.");
       return;
     }
     if (!isValidUrl(demo)) {
-      console.warn("⚠️ La URL de la demo no parece válida.");
+      console.warn("La URL de la demo no parece válida.");
       return;
     }
     if (!isValidImageValue(image)) {
-      console.warn("⚠️ La imagen (avatar) no parece válida. Súbela de nuevo.");
+      console.warn("La imagen (avatar) no parece válida. Súbela de nuevo.");
       return;
     }
     if (!isValidImageValue(photo)) {
       console.warn(
-        "⚠️ La foto del proyecto no parece válida. Súbela de nuevo.",
+        "La foto del proyecto no parece válida. Súbela de nuevo.",
       );
       return;
     }
@@ -145,7 +145,7 @@ function FormPage() {
         "";
 
       if (!url) {
-        console.error("❌ Respuesta API:", data);
+        console.error("Respuesta API:", data);
         throw new Error(
           "La API respondió OK, pero no encuentro la URL de la tarjeta.",
         );
@@ -156,12 +156,12 @@ function FormPage() {
    };
 
 setCards([...cards, newCard]);
-      console.log("✅ Tarjeta creada:", url);
+      console.log("Tarjeta creada:", url);
 
       window.location.assign(url);
 
     } catch (err) {
-      console.error("❌ Error creando tarjeta:", err);
+      console.error("Error creando tarjeta:", err);
     } finally {
       setIsLoading(false);
     }

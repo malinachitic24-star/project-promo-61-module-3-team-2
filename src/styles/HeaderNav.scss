@@ -66,6 +66,25 @@
 }
 
 /* CENTER */
+
+.logo__link {
+  text-decoration: none;   
+  filter: brightness(0) invert(1);
+    margin: 0;
+  line-height: 1;
+  font-size: 1.2rem;     
+}
+
+.logo__link:visited,
+.logo__link:active,
+.logo__link:hover {
+  text-decoration: none;
+    margin: 0;
+  line-height: 1;
+  font-size: 1.2rem;
+  filter: brightness(0) invert(1);
+}
+
 .header__left {
   justify-self: center;
   gap: 0.5rem;
@@ -77,6 +96,7 @@
   margin: 0;
   line-height: 1;
   font-size: 1.2rem;
+  text-decoration: none;
 }
 
 .header__icon--nav {
@@ -115,9 +135,7 @@
   pointer-events: auto;
 }
 
-/* =========================
-   DRAWER
-   ========================= */
+/* DRAWER */
 .drawer {
   position: fixed;
   top: 0;
