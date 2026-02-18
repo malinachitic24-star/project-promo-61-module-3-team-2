@@ -6,9 +6,9 @@ import FormPage from "../Pages/formPage";
 import { Link, Routes, Route } from "react-router-dom";
 import Landing from "./Landing/Landing.jsx";
 import Card from "../components/Card.jsx";
-import CardListPage from "../Pages/CardListPage.jsx";
-import CardDetailPage from "../Pages/CardDetailPage.jsx";
 import Footer from "./Footer.jsx";
+import ProjectDetail from "../Pages/projectDetail.jsx";
+import ProjectsPage from "../Pages/projectsPage.jsx";
 
 function App() {
   return (
@@ -16,8 +16,8 @@ function App() {
         <Header />
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/create" element={<CardListPage />} />
-        <Route path="/create/:id" element={<CardDetailPage />} />
+        <Route path="/create" element={<ProjectsPage/>} />
+        <Route path="/create/:id" element={<ProjectDetail />} />
         <Route path="/projects" element={<FormPage />}></Route>
         <Route path="/aboutus" element={<AboutUs></AboutUs>}></Route>
       </Routes>
