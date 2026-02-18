@@ -1,7 +1,7 @@
 //import { useState } from 'react'
 import "../styles/App.scss";
 import AboutUs from "./AboutUs";
-import Header from "./Header";
+import Header from "./HeaderNav";
 import FormPage from "../Pages/formPage";
 import { Link, Routes, Route } from "react-router-dom";
 import Landing from "./Landing/Landing.jsx";
