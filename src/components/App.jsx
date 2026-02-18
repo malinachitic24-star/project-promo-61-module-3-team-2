@@ -6,7 +6,6 @@ import FormPage from "../Pages/formPage";
 import { Link, Routes, Route } from "react-router-dom";
 import Landing from "./Landing/Landing.jsx";
 import Card from "../components/Card.jsx";
-import CardListPage from "../Pages/CardListPage.jsx";
 import Footer from "./Footer.jsx";
 import ProjectDetail from "../Pages/projectDetail.jsx";
 import ProjectsPage from "../Pages/projectsPage.jsx";

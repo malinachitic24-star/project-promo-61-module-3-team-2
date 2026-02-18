@@ -17,6 +17,8 @@ function ProjectsPage() {
     setCards(filtered);
   };
 
+console.log(cards);
+
   return (
     <div>
       <h1>Lista de proyectos</h1>
