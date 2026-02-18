@@ -49,7 +49,7 @@ function FormPage() {
   const [formData, setFormData] = useLocalStorage(LS_FORM_KEY, INITIAL_FORM_DATA);
 
   /* CARDS STATE (WITH LOCALSTORAGE) */
-  const [ setCards] = useLocalStorage(LS_CARDS_KEY, []);
+  const [cards, setCards] = useLocalStorage(LS_CARDS_KEY, []);
 
   /* UI STATE */
   const [isLoading, setIsLoading] = useState(false);
