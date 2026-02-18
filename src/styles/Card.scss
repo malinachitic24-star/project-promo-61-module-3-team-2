@@ -1,97 +1,33 @@
 @use "../styles/variables" as vars;
 
+
 /* CONTENEDOR GRID */
+
+.h1 {
+  color: var(--color-dark);
+  margin-left: 2rem;
+  margin-top: 2rem;
+}
 .cardlist {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2rem;
-  padding: 2rem 3rem;
-  font-family: var(--font-base2);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 5rem;
+  margin-left: 2rem;
 }
 
-/* CARD INDIVIDUAL - estilo glass */
+/* CARD INDIVIDUAL */
 .card {
-  padding: 1.8rem 1.2rem;
-  border-radius: 1.5rem;
-
-  background: rgba(56, 7, 93, 0.35);
-  backdrop-filter: blur(0.9rem);
-  -webkit-backdrop-filter: blur(0.9rem);
-
-  border: 0.125rem solid rgba(255, 255, 255, 0.15);
-
-  box-shadow: 0 1.125rem 2.5rem rgba(0, 0, 0, 0.25);
-
-  color: rgba(255, 255, 255, 0.92);
+  background-color: var(--color-dark);
+  border-radius: 1.25rem;
+  box-shadow: 0 0.6rem 2rem rgba(0, 0, 0, 0.4);
+  color: var(--color-white);
+  padding: 15px;
   text-align: center;
-  line-height: 1.4;
-
-  cursor: pointer;
-  transition: transform 180ms ease, filter 180ms ease, border-color 180ms ease;
 }
 
-/* HOVER igual que botones */
-.card:hover {
-  transform: translateY(-0.2rem);
-  filter: brightness(1.05);
-  border-color: rgba(168, 155, 255, 0.95);
-}
-
-/* TÍTULOS */
-.card h3 {
-  font-weight: 400;
-  font-size: 0.95rem;
-  margin: 0.3rem 0;
-  letter-spacing: 0.02rem;
-}
-
-h1 {
-  font-family: var(--font-base2);
-  padding: 1.8rem 1.2rem;
-  color: rgb(179, 146, 241);
-}
-
-/* Nombre más destacado */
-.card h3:nth-child(2) {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: rgb(179, 146, 241);
-  margin-bottom: 0.6rem;
-}
-
-/* IMAGEN */
 .cardlist-container_image {
-  width: 100%;
-  height: 220px;
+  width: 10rem;
   object-fit: cover;
-  border-radius: 1rem;
-  margin-top: 1rem;
-
-  border: 0.125rem solid rgba(255, 255, 255, 0.25);
-
-  transition: transform 180ms ease;
-}
-
-.card:hover .cardlist-container_image {
-  transform: scale(1.04);
-}
-
-/* TABLET */
-@media (min-width: 48rem) {
-  .cardlist {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  
-}
-
-/*DESKTOP*/
-@media (min-width: 64rem) {
-  .cardlist {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-  }
-
- 
+  border-radius: 0.6rem;
 }
