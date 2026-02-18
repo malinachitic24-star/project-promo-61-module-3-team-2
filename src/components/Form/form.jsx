@@ -39,27 +39,29 @@ function Form({ formData, onChangeForm, onSubmitForm, onResetForm, isLoading }) 
   return (
     <form className="project-form" onSubmit={handleSubmit} aria-label="Project form">
       {/* PROJECT INFO SECTION */}
+      
       <fieldset className="project-form__fieldset" disabled={isLoading}>
         <legend className="project-form__legend">Información del Proyecto</legend>
         <legend className="project-form__legend_2">Cuéntanos sobre tu proyecto</legend>
+        <span className="project-form__span"> Campos obligatorios (*)</span>
 
         <input required className="project-form__input" id="name" type="text" name="name"
-          placeholder="Nombre del Proyecto" value={formData.name} onChange={handleChange} />
+          placeholder="Nombre del Proyecto (*)" value={formData.name} onChange={handleChange} />
 
         <input required className="project-form__input" id="slogan" type="text" name="slogan"
-          placeholder="Slogan" value={formData.slogan} onChange={handleChange} />
+          placeholder="Slogan (*)" value={formData.slogan} onChange={handleChange} />
 
         <input required className="project-form__input" id="technologies" type="text" name="technologies"
-          placeholder="Tecnologías" value={formData.technologies} onChange={handleChange} />
+          placeholder="Tecnologías (*)" value={formData.technologies} onChange={handleChange} />
 
         <input required className="project-form__input" id="repo" type="url" name="repo"
-          placeholder="URL repositorio" value={formData.repo} onChange={handleChange} />
+          placeholder="URL repositorio (*)" value={formData.repo} onChange={handleChange} />
 
         <input required className="project-form__input" id="demo" type="url" name="demo"
-          placeholder="URL Demo" value={formData.demo} onChange={handleChange} />
+          placeholder="URL Demo (*)" value={formData.demo} onChange={handleChange} />
 
         <textarea required className="project-form__textarea" id="desc" name="desc"
-          placeholder="Descripción" value={formData.desc} onChange={handleChange} rows={4} />
+          placeholder="Descripción (*)" value={formData.desc} onChange={handleChange} rows={4} />
       </fieldset>
 
       {/* AUTHOR INFO SECTION */}
@@ -67,10 +69,10 @@ function Form({ formData, onChangeForm, onSubmitForm, onResetForm, isLoading }) 
         <legend className="project-form__legend_2">Cuéntanos sobre la autora</legend>
 
         <input required className="project-form__input" id="author" type="text" name="author"
-          placeholder="Nombre de la autora" value={formData.author} onChange={handleChange} />
+          placeholder="Nombre de la autora (*)" value={formData.author} onChange={handleChange} />
 
         <input required className="project-form__input" id="job" type="text" name="job"
-          placeholder="Puesto de trabajo" value={formData.job} onChange={handleChange} />
+          placeholder="Puesto de trabajo (*)" value={formData.job} onChange={handleChange} />
       </fieldset>
 
       {/* IMAGE UPLOAD SECTION */}
@@ -79,7 +81,7 @@ function Form({ formData, onChangeForm, onSubmitForm, onResetForm, isLoading }) 
 
         <div className="project-form__uploadRow">
           <label className="project-form__uploadBtn" htmlFor="photo">
-            Subir foto<br />del proyecto
+            Subir foto<br />del proyecto (*)
           </label>
           <input
             id="photo"
@@ -91,7 +93,7 @@ function Form({ formData, onChangeForm, onSubmitForm, onResetForm, isLoading }) 
           />
 
           <label className="project-form__uploadBtn" htmlFor="image">
-            Subir foto<br />de la autora
+            Subir foto<br />de la autora (*)
           </label>
           <input
             id="image"
