@@ -6,14 +6,16 @@
 .h1 {
   color: var(--color-dark);
   margin-left: 2rem;
-  margin-top: 2rem;
+  margin-top: 3rem;
 }
 .cardlist {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 20px;
   margin-top: 5rem;
   margin-left: 2rem;
+  
+  
 }
 
 /* CARD INDIVIDUAL */
@@ -30,4 +32,32 @@
   width: 10rem;
   object-fit: cover;
   border-radius: 0.6rem;
+}
+
+/*Medias queries */
+
+@media (min-width: 48rem) {
+  .cardlist {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 5rem;
+  margin-left: 2rem;
+  
+  .card {
+  background-color: var(--color-dark);
+  border-radius: 1.25rem;
+  box-shadow: 0 0.6rem 2rem rgba(0, 0, 0, 0.4);
+  color: var(--color-white);
+  padding: 15px;
+ 
+
+}
+
+.cardlist-container_image {
+  width: 4rem;
+  object-fit: cover;
+  border-radius: 0.6rem;
+}
+}
 }

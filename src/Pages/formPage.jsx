@@ -9,6 +9,8 @@ import HeaderNav from "../components/HeaderNav.jsx";
 
 /* LOCAL STORAGE KEYS */
 const LS_FORM_KEY = "projectFormData";
+const LS_CARDS_KEY = "projectCards";
+
 
 /* INITIAL STATE */
 const INITIAL_FORM_DATA = {
@@ -51,6 +53,8 @@ function FormPage() {
     INITIAL_FORM_DATA,
   );
 
+ 
+  const [cards, setCards] = useLocalStorage(LS_CARDS_KEY, []);
   /* UI STATE */
   const [isLoading, setIsLoading] = useState(false);
 
@@ -147,10 +151,16 @@ function FormPage() {
           "La API respondió OK, pero no encuentro la URL de la tarjeta.",
         );
       }
+   const newCard = {
+   id: Date.now(),
+   ...formData,
+   };
 
+setCards([...cards, newCard]);
       console.log("✅ Tarjeta creada:", url);
 
       window.location.assign(url);
+
     } catch (err) {
       console.error("❌ Error creando tarjeta:", err);
     } finally {
