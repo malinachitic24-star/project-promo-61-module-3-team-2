@@ -1,0 +1,13 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--color-dark);
+  height: 5rem;
+  overflow: hidden;
+
+  &__logo {
+    height: 7rem;
+    object-fit: cover;
+  }
+}

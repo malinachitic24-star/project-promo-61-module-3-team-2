@@ -1,20 +1,21 @@
 import "../../styles/LandingSyles/Cards.scss";
 
-const Cards= ({imagen,proyecto,nombre,tech})=> {
+const Cards= ({imagen,nombre,tech,description,city})=> {
     return(
         <div className="card_container">
-            <header className="card_header">
+            <div className="card_container_head">
+                <h3 className="card_title">{nombre}</h3>
                 <img
                     className="card_project-img"
                     src={imagen}
-                    alt={proyecto}
+                    alt={nombre}
                 />
-            </header>
-
-            <div className="card_body">
-                <h3 className="card_title">{nombre}</h3>
-                <p className="card_"></p>
-                <p className="card_tech">{tech}</p>
+                <div className="card_container_info">
+                    <p className="card_tech">{tech}</p>
+                    <p className="card_city">{city}</p>
+                    <p className="card_description">{description}</p>
+                    
+                </div>
             </div>
         </div>
     )
