@@ -12,6 +12,8 @@ const Card = ({
   onDelete,
 }) => {
   return (
+
+    <> 
     <div className="card">
       <div onClick={() => onSelect(id)} style={{ cursor: "pointer" }}>
         <h3>{name}</h3>
@@ -22,7 +24,11 @@ const Card = ({
       </div>
 
       <button onClick={() => onDelete(id)}>🗑 Borrar</button>
+
+      
     </div>
+    
+</>
   );
 };
 
