@@ -63,7 +63,7 @@ function FormPage() {
   const handleResetForm = () => {
     setFormData(INITIAL_FORM_DATA);
     console.clear?.();
-    console.log("Formulario reseteado.");
+    console.log("🧹 Formulario reseteado.");
   };
 
   /* SUBMIT HANDLER */
@@ -156,11 +156,11 @@ function FormPage() {
         return next;
       });
 
-      console.log("✅ Guardada en localStorage:", newCard);
+      console.log("Guardada en localStorage:", newCard);
       console.log("Tarjeta creada:", url);
 
-      // URL API
-      window.location.assign(url);
+      // API
+      window.open(url, "_blank", "noopener,noreferrer");
     } catch (err) {
       console.error("Error creando tarjeta:", err);
     } finally {
